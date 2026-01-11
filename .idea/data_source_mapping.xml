@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef/console.sql" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/DeviceAssignmentDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/DeviceDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/EmployeeDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/LicenseDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/SoftwareDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/assetmanagementsystem/dao/VendorDAO.java" value="8da0a7b8-c0f0-4e2f-a782-b3e2b67185ef" />
+  </component>
+</project>

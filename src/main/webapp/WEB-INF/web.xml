@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+
+        <servlet>
+            <servlet-name>employee</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.EmployeeServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>employee</servlet-name>
+            <url-pattern>/employee</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>vendor</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.VendorServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>vendor</servlet-name>
+            <url-pattern>/vendor</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>device</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.DeviceServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>device</servlet-name>
+            <url-pattern>/device</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>software</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.SoftwareServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>software</servlet-name>
+            <url-pattern>/software</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>license</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.LicenseServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>license</servlet-name>
+            <url-pattern>/license</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>deviceAssignment</servlet-name>
+            <servlet-class>com.example.assetmanagementsystem.controller.DeviceAssignmentServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>deviceAssignment</servlet-name>
+            <url-pattern>/deviceAssignment</url-pattern>
+        </servlet-mapping>
+
+
+</web-app>
