@@ -11,24 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LicenseDAO {
-    public void create(License license){
+    public void create(License license) throws Exception{
         String sql="INSERT INTO license(software_id,device_id,license_key,price,validity_in_days,activated_on) VALUES(?,?,?,?,?,?)";
-        try(Connection con= DBUtil.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)){
+        Connection con= DBUtil.getConnection();
+        PreparedStatement ps=con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+        try{
+            con.setAutoCommit(false);
+            PreparedStatement ps2=con.prepareStatement("SELECT price,validity_in_days FROM software WHERE id=?");
+            ps2.setInt(1,license.getSoftwareId());
+            ResultSet sw=ps2.executeQuery();
+
             ps.setInt(1,license.getSoftwareId());
             ps.setInt(2,license.getDeviceId());
             ps.setString(3, license.getLicenseKey());
-            ps.setFloat(4,license.getPrice());
-            ps.setInt(5,license.getValidityInDays());
+            ps.setFloat(4,sw.getFloat(1));
+            ps.setInt(5,sw.getInt(2));
             ps.setDate(6, java.sql.Date.valueOf(license.getActivatedOn()));
             ps.executeUpdate();
+            con.commit();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
                 int id=rs.getInt(1);
                 license.setId(id);
             }
         }catch (Exception e){
+            con.rollback();
             e.printStackTrace();
+        }finally {
+            con.close();
         }
     }
     public License getById(int id){

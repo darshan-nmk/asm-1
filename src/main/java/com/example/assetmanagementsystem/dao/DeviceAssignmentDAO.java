@@ -1,5 +1,6 @@
 package com.example.assetmanagementsystem.dao;
 
+import com.example.assetmanagementsystem.model.Device;
 import com.example.assetmanagementsystem.model.DeviceAssignment;
 import com.example.assetmanagementsystem.util.DBUtil;
 
@@ -11,28 +12,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceAssignmentDAO {
-    public void create(DeviceAssignment deviceAssignment){
-        String sql="INSERT INTO deviceAssignment(device_id,employee_id,assigned_from) VALUES (?,?,?)";
-        try(Connection con= DBUtil.getConnection();
-            PreparedStatement ps= con.prepareStatement(sql)){
+    public void create(DeviceAssignment deviceAssignment) throws Exception {
+        Connection con= DBUtil.getConnection();
+        try{
+            con.setAutoCommit(false);
+            PreparedStatement ps= con.prepareStatement("INSERT INTO deviceAssignment(device_id,employee_id,assigned_from) VALUES (?,?,?)");
             ps.setInt(1, deviceAssignment.getDeviceId());
             ps.setInt(2, deviceAssignment.getEmployeeId());
             ps.setDate(3, java.sql.Date.valueOf(deviceAssignment.getAssignedFrom()));
             ps.executeUpdate();
+            PreparedStatement ps2=con.prepareStatement("UPDATE device SET status=? WHERE id=?");
+            ps2.setString(1, Device.Status.ASSIGNED.toString());
+            ps2.setInt(2, deviceAssignment.getDeviceId());
+            ps2.executeUpdate();
+            con.commit();
         }catch (Exception e){
+            con.rollback();
             e.printStackTrace();
+        }finally {
+            con.close();
         }
     }
-    public void update(int deviceId, LocalDate assignedTill){
-        String sql="UPDATE deviceAssignment SET assigned_till=? WHERE device_id=?";
-        try(Connection con=DBUtil.getConnection();
-        PreparedStatement ps=con.prepareStatement(sql)){
+    public void update(int deviceId, LocalDate assignedTill) throws Exception {
+        Connection con = DBUtil.getConnection();
+        try{
+            con.setAutoCommit(false);
+            PreparedStatement ps = con.prepareStatement("UPDATE deviceAssignment SET assigned_till=? WHERE device_id=?");
             ps.setDate(1, java.sql.Date.valueOf(assignedTill));
             ps.setInt(2, deviceId);
             ps.executeUpdate();
+            PreparedStatement ps2 = con.prepareStatement("UPDATE device SET status=? WHERE id=?");
+            ps2.setString(1, Device.Status.AVAILABLE.toString());
+            ps2.setInt(2, deviceId);
+            ps2.executeUpdate();
+            con.commit();
         }catch (Exception e){
-            e.printStackTrace();
+            con.rollback();
+        }finally {
+            con.close();
         }
+
     }
     public List<DeviceAssignment> getByID(int deviceId){
         String sql="SELECT * FROM deviceAssignment WHERE device_id=?";

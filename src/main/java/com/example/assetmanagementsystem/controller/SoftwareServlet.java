@@ -38,28 +38,4 @@ public class SoftwareServlet extends HttpServlet {
             resp.sendError(500,e.getMessage());
         }
     }
-
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        try {
-            Software software = mapper.readValue(req.getReader(), Software.class);
-            dao.update(software);
-            resp.getWriter().write("Software Updated with id: " + software.getId());
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
-
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
-            int id=Integer.parseInt(req.getParameter("id"));
-            dao.delete(id);
-            resp.getWriter().write("Software Deleted with id: " + id);
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }
-        catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
 }

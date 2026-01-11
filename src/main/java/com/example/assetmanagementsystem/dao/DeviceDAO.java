@@ -24,18 +24,6 @@ public class DeviceDAO {
             e.printStackTrace();
         }
     }
-    public void update(Device device){
-        String sql="UPDATE device SET name=?,serial_number=? WHERE id=?";
-        try(Connection con= DBUtil.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setString(1, device.getName());
-            ps.setString(2, device.getSerialNumber());
-            ps.setInt(3, device.getId());
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     public void updateStatus(int deviceId, int status){
         String sql="UPDATE device SET status=? WHERE id=?";
         try(Connection con= DBUtil.getConnection();
@@ -88,14 +76,4 @@ public class DeviceDAO {
         return deviceList;
     }
 
-    public void delete(int id){
-        String sql="DELETE FROM device WHERE id=?";
-        try(Connection con= DBUtil.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

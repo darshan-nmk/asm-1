@@ -36,28 +36,4 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee employee = mapper.readValue(req.getReader(), Employee.class);
-        try{
-            dao.update(employee);
-            resp.getWriter().println("Employee updated successfully for id " + employee.getId());
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id=Integer.parseInt(req.getParameter("id"));
-        try{
-            dao.delete(id);
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            resp.getWriter().println("Employee deleted successfully");
-        }catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
-
 }

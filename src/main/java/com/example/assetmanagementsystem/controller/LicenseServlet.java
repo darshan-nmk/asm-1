@@ -3,7 +3,6 @@ package com.example.assetmanagementsystem.controller;
 import com.example.assetmanagementsystem.dao.LicenseDAO;
 import com.example.assetmanagementsystem.dao.SoftwareDAO;
 import com.example.assetmanagementsystem.model.License;
-import com.example.assetmanagementsystem.model.Software;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -37,9 +36,6 @@ public class LicenseServlet extends HttpServlet {
         resp.setContentType("application/json");
         License license=mapper.readValue(req.getInputStream(),License.class);
         try{
-            Software software=sdoa.getById(license.getSoftwareId());
-            license.setPrice(software.getPrice());
-            license.setValidityInDays(software.getValidityInDays());
             doa.create(license);
             resp.setStatus(201);
             resp.getWriter().write("license created successfully with id:"+license.getId());

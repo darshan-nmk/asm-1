@@ -38,28 +38,4 @@ public class DeviceServlet extends HttpServlet {
             resp.sendError(500,e.getMessage());
         }
     }
-
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        try {
-            Device device = mapper.readValue(req.getReader(), Device.class);
-            dao.update(device);
-            resp.getWriter().write("Device Updated with id: " + device.getId());
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
-
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
-            int id=Integer.parseInt(req.getParameter("id"));
-            dao.delete(id);
-            resp.getWriter().write("Device Deleted with id: " + id);
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }
-        catch (Exception e){
-            resp.sendError(500,e.getMessage());
-        }
-    }
 }

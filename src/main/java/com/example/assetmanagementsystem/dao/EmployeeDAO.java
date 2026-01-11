@@ -53,26 +53,4 @@ public class EmployeeDAO {
         return employeeList;
     }
 
-    public void delete(int id) {
-        String sql="DELETE FROM employee WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-        PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setInt(1,id);
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update(Employee employee) {
-        String sql="UPDATE employee SET name=? WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-        PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setString(1,employee.getName());
-            ps.setInt(2,employee.getId());
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

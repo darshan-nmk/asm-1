@@ -69,29 +69,4 @@ public class SoftwareDAO {
         }
         return softwareList;
     }
-
-    public void delete(int id){
-        String sql="DELETE FROM software WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-        PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setInt(1,id);
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update(Software software){
-        String sql="UPDATE software SET  name=?,price=?,validity_in_days=? WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-        PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setString(1,software.getName());
-            ps.setFloat(2,software.getPrice());
-            ps.setInt(3,software.getValidityInDays());
-            ps.setInt(4,software.getId());
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

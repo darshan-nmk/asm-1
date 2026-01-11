@@ -52,27 +52,4 @@ public class VendorDAO {
         }
         return vendorsList;
     }
-
-    public void delete(int id) {
-        String sql="DELETE FROM vendor WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setInt(1,id);
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update(Vendor vendor) {
-        String sql="UPDATE vendor SET name=? WHERE id=?";
-        try(Connection con=DBUtil.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setString(1,vendor.getName());
-            ps.setInt(2,vendor.getId());
-            ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }
