@@ -17,6 +17,7 @@ public class SoftwareServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            resp.setContentType("application/json");
             if (req.getParameter("id") != null) {
                 mapper.writeValue(resp.getOutputStream(), dao.getById(Integer.parseInt(req.getParameter("id"))));
             } else {

@@ -15,7 +15,7 @@ public class DeviceServlet extends HttpServlet {
     private final DeviceDAO dao = new DeviceDAO();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setContentType("application/json");
         try {
             if (req.getParameter("id") != null) {
                 mapper.writeValue(resp.getOutputStream(), dao.getById(Integer.parseInt(req.getParameter("id"))));
